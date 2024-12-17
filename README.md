@@ -24,6 +24,8 @@ Key Objectives:
 
 The Four-Agent Chain
 
+![](https://i.postimg.cc/76gnPSs2/Clean-Shot-2024-12-16-at-16-09-16-2x.png)
+
 The system is divided into four primary agents, each with a specialized role:
 
     1.    Agent-1: The Search Agent
