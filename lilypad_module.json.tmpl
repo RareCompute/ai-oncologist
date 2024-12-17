@@ -1,6 +1,6 @@
 {
   "machine": {
-    "gpu": 0,
+    "gpu": 1,
     "cpu": 1000,
     "ram": 100
   },
@@ -12,22 +12,24 @@
       },
       "Docker": {
         "Entrypoint": [
-          "/usr/local/bin/cowsay",
-          {{if .Message}}{{.Message}}{{else}}"Pass me an input called Message, like lilypad run cowsay:<tag> -i Message=moo"{{end}}
-        ],
-        "Image": "richbrem/cowsay:latest"
+          "./app.sh"
+          ],
+        "Image": "arsen3d/ai-oncologist:latest",
+        "EnvironmentVariables": [
+          {{.ENV}}
+        ]
       },
       "Engine": "Docker",
       "Network": {
-        "Type": "None"
+        "Type": "Full"
       },
       "PublisherSpec": {
         "Type": "IPFS"
       },
       "Resources": {
-        "GPU": ""
+        "GPU": "1"
       },
-      "Timeout": 1800,
+      "Timeout": 300,
       "Verifier": "Noop"
     }
   }

@@ -1,0 +1,9 @@
+# version: 3.8
+
+services:
+  gradio:
+    image: arsen3d/ai-oncologist:latest
+    build: .
+    command: ./app.sh
+    environment:
+      - CALL_BACK=12354
