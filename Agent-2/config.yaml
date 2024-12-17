@@ -1,0 +1,103 @@
+# config.yaml for Agent-2: The Paper Reader
+
+## Core Configuration Fields
+agent_identity:
+  name: "Agent-2_The-Paper-Reader"
+  version: "1.0.0"
+  description: "Processes paragraphs from retrieved oncology papers and identifies protein-related content."
+  role: "Paragraph-level semantic filter and ranker"
+
+## Model Configuration
+model_configuration:
+  model: "llama2-7b-finetuned-biomedical"    # Placeholder model name; replace with actual model path/ID
+  temperature: 0.3                           # Lower temperature for more deterministic relevance scoring
+  max_tokens: 2048
+  top_p: 0.9
+  top_k: 50
+  repetition_penalty: 1.2
+  environment: "conda:./env/environment.yml" # Conda environment definition file
+
+## Behavioral Settings
+behavioral_settings:
+  goal: "Identify paragraphs that contain relevant molecular or protein information tied to the oncology target."
+  backstory: "Agent-2 refines the initial literature results by filtering paragraphs for onco-targeted protein details."
+  instructions: |
+    You are a biomedical text-filtering agent. Given a batch of paragraphs from oncology research papers, 
+    return only those that are likely to contain protein-related or molecularly relevant information 
+    connected to the target disease or oncogene. Rank them by relevance and provide reasoning summaries.
+
+## Compute Requirements
+compute_requirements:
+  instance_type: "g4dn.xlarge"   # Example: GPU-accelerated instance
+  instance_count: 1
+  memory: "16Gi"
+  cpu: "4"
+
+## Dependencies
+dependencies:
+  conda_file: "./env/environment.yml"
+  code_configuration:
+    code: "./src"
+    scoring_script: "paper_reader_entrypoint.py"
+
+## Integration Components
+tools:
+  - name: "vector_database"
+    type: "Database"
+    endpoint: "http://vector-db-service:8080/api/v1/query"  # Placeholder endpoint for vector search
+  
+  - name: "logging_service"
+    type: "API"
+    endpoint: "http://logging-service:5000/logs"
+    
+auth:
+  auth_mode: "none"
+  # api_keys: [] # Add if necessary for external tools
+
+## Task Configuration
+task_definition:
+  description: "Filter and rank paragraphs from scientific papers for protein-related relevance."
+  expected_output: "JSON with a list of relevant paragraphs, each with a relevance_score and reasoning_summary."
+  agent: "Agent-2"
+
+## Deployment Settings
+deployment:
+  deployment_type: "kubernetes"
+  replicas: 1
+  service:
+    type: "LoadBalancer"
+    port: 8080
+
+## Prompt Templates
+prompt_templates:
+  base_prompt: |
+    You are a specialized biomedical analysis model. Given a set of paragraphs and target terms, determine 
+    if each paragraph is likely to mention a protein or molecular entity relevant to the oncology target. 
+    Return only those paragraphs that are clearly related, along with a relevance score (0.0 to 1.0) and 
+    a brief reasoning summary.
+    
+  scoring_prompt: |
+    Paragraph: {{paragraph_text}}
+    Target Terms: {{target_terms}}
+    
+    Instructions: Determine if this paragraph describes proteins, molecular targets, or binding interactions 
+    related to the target terms. Consider structural features, protein domains, inhibitors, or mutations 
+    relevant to the oncology domain. Assign a relevance_score and provide a reasoning_summary in one sentence.
+    
+    Output format:
+    {
+      "relevance_score": <float between 0.0 and 1.0>,
+      "reasoning_summary": "<short explanation>"
+    }
+
+## Logging & Monitoring
+logging:
+  level: "INFO"
+  format: "json"
+  destination: "stdout"
+
+monitoring:
+  enable_metrics: true
+  metrics_endpoint: "/metrics"
+
+# End of config.yaml
