@@ -1,6 +1,6 @@
 # AI Oncologist
 
-### Decentralized AI-Oncologist
+## Decentralized AI-Oncologist
 
 Welcome to the Decentralized AI-Oncologist, a four-agent, chain-of-command AI system designed to support novel compound and protein discovery for precision oncology. 
 
