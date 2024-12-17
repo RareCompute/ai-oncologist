@@ -1,6 +1,6 @@
 # Agent-2: The Paper Reader
 
-*(Placeholder for agent topology diagram highlighting Agent-2)*
+![](https://i.postimg.cc/76gnPSs2/Clean-Shot-2024-12-16-at-16-09-16-2x.png)
 
 ## Overview
 
