@@ -33,19 +33,8 @@ compute_requirements:
   memory: "16Gi"
   cpu: "4"
 
-## Dependencies
-dependencies:
-  conda_file: "./env/environment.yml"
-  code_configuration:
-    code: "./src"
-    scoring_script: "paper_reader_entrypoint.py"
-
 ## Integration Components
 tools:
-  - name: "vector_database"
-    type: "Database"
-    endpoint: "http://vector-db-service:8080/api/v1/query"  # Placeholder endpoint for vector search
-  
   - name: "logging_service"
     type: "API"
     endpoint: "http://logging-service:5000/logs"
@@ -61,6 +50,7 @@ task_definition:
   agent: "Agent-2"
 
 ## Deployment Settings
+## Refactor for LP
 deployment:
   deployment_type: "kubernetes"
   replicas: 1
@@ -71,7 +61,7 @@ deployment:
 ## Prompt Templates
 prompt_templates:
   base_prompt: |
-    You are a specialized biomedical analysis model. Given a set of paragraphs and target terms, determine 
+    You are a specialized biomedical analysis model. Given a paragraphs and target terms, determine 
     if each paragraph is likely to mention a protein or molecular entity relevant to the oncology target. 
     Return only those paragraphs that are clearly related, along with a relevance score (0.0 to 1.0) and 
     a brief reasoning summary.
