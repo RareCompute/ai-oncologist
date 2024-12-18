@@ -1,4 +1,4 @@
-# AI Oncologist!!!
+# AI Oncologist
 
 ## Decentralized AI-Oncologist
 
