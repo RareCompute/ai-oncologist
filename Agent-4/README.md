@@ -4,7 +4,11 @@
 
 ## Overview
 
-**Agent-4: The Molecular Designer** is the fourth and final stage in the Decentralized AI-Oncologist pipeline. It takes the detailed prompts and experimental instructions created by **Agent-3 (The Oncologist)** and uses a generative text-to-protein/molecule diffusion model to design new protein (or small molecule) candidates. The primary output is a **PDB file** that encodes the three-dimensional structure of the generated protein. Additionally, Agent-4 structures the associated metadata so that the newly generated design can be easily fed back into the broader agent system and used for downstream drug discovery and precision medicine tasks.
+**Agent-4: The Molecular Designer** is the fourth and final stage in the Decentralized AI-Oncologist pipeline. 
+
+It takes the detailed prompts and experimental instructions created by **Agent-3 (The Oncologist)** and uses a generative text-to-protein/molecule diffusion model to design new protein (or small molecule) candidates. 
+
+The primary output is a **PDB file** that encodes the three-dimensional structure of the generated protein. Additionally, Agent-4 structures the associated metadata so that the newly generated design can be easily fed back into the broader agent system and used for downstream drug discovery and precision medicine tasks.
 
 ## Purpose and Function
 
